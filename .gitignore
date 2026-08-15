@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+
+# Expo / Metro
+.expo/
+dist/
+web-build/
+.metro-health-check*
+.cache/
+
+# Generated native projects
+/android/
+/ios/
+.kotlin/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+.project-config.json
+*.pem
+*.key
+*.p8
+*.p12
+*.jks
+*.keystore
+*.mobileprovision
+
+# Logs / package manager
+*.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+pnpm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Local/generated artifacts
+app-example/
+.webdev/
+*.tgz
+*.tar.gz
+*.zip
+
+# Deterministically generated app/audio assets (pnpm assets / postinstall)
+assets/images/*.png
+assets/audio/*.wav

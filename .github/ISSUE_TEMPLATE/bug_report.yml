@@ -1,0 +1,36 @@
+name: Bug Report
+description: Reproduzierbaren Fehler melden
+title: "[BUG] "
+labels: [bug]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Fehlerbeschreibung
+      description: Was ist passiert und was wurde erwartet?
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Gerät / Android- oder iOS-Version
+      placeholder: "z. B. vivo V40 5G / Android 16"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduktion
+      description: Schritte, mit denen der Fehler zuverlässig auftritt.
+    validations:
+      required: true
+  - type: textarea
+    id: audio
+    attributes:
+      label: Audio-Setup
+      description: Internes Mikrofon, USB-Audio, Bluetooth, Kopfhörer, Sample-Rate usw.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      render: shell

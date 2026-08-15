@@ -1,1 +1,0 @@
-LoopForge repository import is being prepared. This temporary bootstrap marker will be removed by the final source commit.

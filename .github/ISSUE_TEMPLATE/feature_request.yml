@@ -1,0 +1,32 @@
+name: Feature Request
+description: Neue Funktion oder Workflow vorschlagen
+title: "[FEATURE] "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Use Case
+      description: Welcher konkrete Live- oder Produktionsworkflow soll verbessert werden?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Lösungsvorschlag
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Bereich
+      options:
+        - Audio Engine
+        - Recording / Overdub
+        - Mixer / FX
+        - Rhythm / Sequencer
+        - MIDI / Sync
+        - Projekte / Export
+        - UI / UX
+        - Build / CI
+        - Sonstiges

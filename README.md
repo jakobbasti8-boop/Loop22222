@@ -43,9 +43,13 @@ pnpm ios
 
 `pnpm metro` startet Metro mit geleertem Cache.
 
+### Reproduzierbare lokale Assets
+
+`pnpm install` führt automatisch `scripts/generate-assets.mjs` aus. Das Skript erzeugt deterministisch die lokalen LoopForge-App-Icons, Metronom-/Drum-Samples und die Reverb-Impulsantwort. Die generierten PNG/WAV-Dateien werden bewusst nicht versioniert; `pnpm assets` kann sie jederzeit neu erzeugen. Dadurch bleibt das Repository klein, reviewbar und frei von unnötigen Binär-Duplikaten.
+
 ## Validierung in dieser Übergabe
 
-Der dependency-freie `pnpm preflight`-Kern wurde als `node scripts/preflight.mjs` ausgeführt und ist erfolgreich. Zusätzlich prüft `pnpm integrity` alle lokalen TS/TSX-Importpfade ohne installierte Dependencies. Zusätzlich wurden alle 82 TS/TSX-Quelldateien mit dem TypeScript-Parser transpiliert; dabei traten keine Syntaxdiagnosen auf.
+Der dependency-freie `pnpm preflight`-Kern wurde als `node scripts/preflight.mjs` ausgeführt und ist erfolgreich. Zusätzlich prüft `pnpm integrity` alle lokalen TS/TSX-Importpfade ohne installierte Dependencies. Zusätzlich wurden alle 78 TS/TSX-Quelldateien mit dem TypeScript-Parser transpiliert; dabei traten keine Syntaxdiagnosen auf.
 
 Ein vollständiges `pnpm install`, `tsc`, Vitest und der native Android-/iOS-Build konnten in der Übergabe-Sandbox nicht abgeschlossen werden, weil deren Container keinen DNS-Zugriff auf `registry.npmjs.org` hatte. Deshalb ist absichtlich kein veraltetes `pnpm-lock.yaml` beigelegt; `pnpm install` erzeugt nach Auflösung der neuen nativen Abhängigkeit einen frischen Lockfile.
 
