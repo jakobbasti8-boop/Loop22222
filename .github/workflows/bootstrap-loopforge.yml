@@ -24,12 +24,7 @@ jobs:
         run: |
           set -euo pipefail
           cat .bootstrap/source.part-* | base64 --decode > /tmp/loopforge-source.tar.gz
-          echo "${{ vars.LOOPFORGE_BOOTSTRAP_SHA256 }}  /tmp/loopforge-source.tar.gz" > /tmp/expected.sha256
-          if [ -n "${{ vars.LOOPFORGE_BOOTSTRAP_SHA256 }}" ]; then
-            sha256sum --check /tmp/expected.sha256
-          else
-            sha256sum /tmp/loopforge-source.tar.gz
-          fi
+          echo "62844befef6ff2ca03185ffce992a0e9b177cdd2d05500c90dab139c41c6f8e4  /tmp/loopforge-source.tar.gz" | sha256sum --check
           mkdir -p /tmp/loopforge-source
           tar -xzf /tmp/loopforge-source.tar.gz -C /tmp/loopforge-source
 
