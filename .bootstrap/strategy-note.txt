@@ -1,0 +1,1 @@
+Switching bootstrap verification to exact Git blob validation.
