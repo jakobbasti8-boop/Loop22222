@@ -1,0 +1,45 @@
+name: Bootstrap LoopForge source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".bootstrap/READY"
+
+permissions:
+  contents: write
+
+jobs:
+  import-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout bootstrap repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reassemble verified source archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .bootstrap/source.part-* | base64 --decode > /tmp/loopforge-source.tar.gz
+          echo "${{ vars.LOOPFORGE_BOOTSTRAP_SHA256 }}  /tmp/loopforge-source.tar.gz" > /tmp/expected.sha256
+          if [ -n "${{ vars.LOOPFORGE_BOOTSTRAP_SHA256 }}" ]; then
+            sha256sum --check /tmp/expected.sha256
+          else
+            sha256sum /tmp/loopforge-source.tar.gz
+          fi
+          mkdir -p /tmp/loopforge-source
+          tar -xzf /tmp/loopforge-source.tar.gz -C /tmp/loopforge-source
+
+      - name: Replace bootstrap tree with production source
+        shell: bash
+        run: |
+          set -euo pipefail
+          rsync -a --delete --exclude='.git' /tmp/loopforge-source/ ./
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: import LoopForge Pro v2 production repository [skip ci]" || exit 0
+          git push origin HEAD:main
